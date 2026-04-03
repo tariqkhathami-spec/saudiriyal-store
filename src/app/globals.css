@@ -1,26 +1,118 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FEFDF8;
+  --foreground: #1A1A2E;
+  --navy: #0A1628;
+  --navy-light: #162240;
+  --charcoal: #2D2D3F;
+  --ivory: #FEFDF8;
+  --ivory-dark: #F5F0E8;
+  --gold: #D4A853;
+  --gold-light: #E8C97A;
+  --gold-dark: #B8923E;
+  --cream: #FAF7F0;
+  --muted: #6B7280;
+  --border: #E5E1D8;
+  --success: #059669;
+  --error: #DC2626;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-navy: var(--navy);
+  --color-navy-light: var(--navy-light);
+  --color-charcoal: var(--charcoal);
+  --color-ivory: var(--ivory);
+  --color-ivory-dark: var(--ivory-dark);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-gold-dark: var(--gold-dark);
+  --color-cream: var(--cream);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-success: var(--success);
+  --color-error: var(--error);
+  --font-heading: var(--font-playfair);
+  --font-body: var(--font-inter);
+  --font-heading-ar: var(--font-noto-naskh);
+  --font-body-ar: var(--font-ibm-plex-ar);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: var(--border);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Luxury scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--ivory-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-dark);
+}
+
+/* Selection color */
+::selection {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Premium link underline animation */
+.link-luxury {
+  position: relative;
+  text-decoration: none;
+}
+.link-luxury::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.3s ease;
+}
+.link-luxury:hover::after {
+  width: 100%;
+}
+
+/* Gold gradient text */
+.text-gold-gradient {
+  background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Luxury card hover */
+.card-luxury {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-luxury:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(10, 22, 40, 0.1);
+}
+
+/* Section divider */
+.divider-gold {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
 }
