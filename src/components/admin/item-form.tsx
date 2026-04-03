@@ -18,6 +18,7 @@ export function ItemForm({ item, prefill }: Props) {
   const [error, setError] = useState("");
   const [imageFiles, setImageFiles] = useState<File[]>([]);
   const [imagePreviews, setImagePreviews] = useState<string[]>(prefill?.imageUrls || []);
+  const [externalImageUrls] = useState<string[]>(prefill?.imageUrls || []);
 
   const [form, setForm] = useState({
     title_en: item?.title_en || prefill?.title_en || "",
@@ -94,6 +95,7 @@ export function ItemForm({ item, prefill }: Props) {
         featured: form.featured,
         visible: form.visible,
         ebay_url: form.ebay_url || null,
+        ebay_item_id: prefill?.ebay_item_id || item?.ebay_item_id || null,
         slug,
         updated_at: new Date().toISOString(),
       };
@@ -113,7 +115,7 @@ export function ItemForm({ item, prefill }: Props) {
         itemId = data.id;
       }
 
-      // Upload new images
+      // Upload new images (from file picker)
       if (imageFiles.length > 0 && itemId) {
         for (let i = 0; i < imageFiles.length; i++) {
           const file = imageFiles[i];
@@ -131,6 +133,25 @@ export function ItemForm({ item, prefill }: Props) {
               is_primary: i === 0 && !item,
               sort_order: i,
             });
+          }
+        }
+      }
+
+      // Upload external URL images (from eBay import)
+      if (externalImageUrls.length > 0 && imageFiles.length === 0 && itemId && !item) {
+        for (let i = 0; i < externalImageUrls.length; i++) {
+          try {
+            await fetch("/api/upload-url-image", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                imageUrl: externalImageUrls[i],
+                itemId,
+                index: i,
+              }),
+            });
+          } catch {
+            // Continue with other images if one fails
           }
         }
       }
