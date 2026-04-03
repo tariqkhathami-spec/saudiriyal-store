@@ -11,6 +11,7 @@ import { WhatsAppFab } from "@/components/layout/whatsapp-fab";
 import "../globals.css";
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
+const GA4_ID = process.env.NEXT_PUBLIC_GA4_ID;
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -194,6 +195,11 @@ export default async function LocaleLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        {GTM_ID && (
+          <Script id="gtag-init" strategy="afterInteractive">
+            {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA4_ID}');`}
+          </Script>
+        )}
         {GTM_ID && (
           <Script id="gtm" strategy="afterInteractive">
             {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
