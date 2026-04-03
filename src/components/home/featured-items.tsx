@@ -17,23 +17,36 @@ export function FeaturedItems() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetch() {
+    async function fetchItems() {
       try {
         const supabase = createClient();
-        const { data } = await supabase
+        // First try featured items
+        const { data: featured } = await supabase
           .from("items")
           .select("*, item_images(*)")
           .eq("featured", true)
           .eq("visible", true)
           .order("sort_order", { ascending: true })
           .limit(6);
-        setItems((data as Item[]) || []);
+
+        if (featured && featured.length > 0) {
+          setItems(featured as Item[]);
+        } else {
+          // Fallback: show latest items if none are featured
+          const { data: latest } = await supabase
+            .from("items")
+            .select("*, item_images(*)")
+            .eq("visible", true)
+            .order("created_at", { ascending: false })
+            .limit(6);
+          setItems((latest as Item[]) || []);
+        }
       } catch {
         // Supabase not configured yet
       }
       setLoading(false);
     }
-    fetch();
+    fetchItems();
   }, []);
 
   return (
