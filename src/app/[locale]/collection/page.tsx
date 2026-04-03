@@ -15,8 +15,8 @@ export async function generateMetadata({
     ? "مجموعة العملات النادرة للبيع — أوراق نقدية سعودية وعثمانية"
     : "Rare Banknotes & Currency for Sale — Saudi, Ottoman, Middle Eastern";
   const description = locale === "ar"
-    ? "تصفح واشتري أوراق نقدية نادرة مصنفة من PMG و NGC. عملات سعودية، عثمانية، فلسطينية وأكثر. خصم 10% عند الشراء المباشر."
-    : "Browse and buy rare PMG & NGC graded banknotes. Saudi Arabian, Ottoman, Palestinian currency and more. 10% off direct purchases via WhatsApp.";
+    ? "تصفح واشتري أوراق نقدية نادرة مصنفة من PMG و NGC. عملات سعودية، عثمانية، فلسطينية وأكثر. وفر حتى 15% عند الشراء المباشر."
+    : "Browse and buy rare PMG & NGC graded banknotes. Saudi Arabian, Ottoman, Palestinian currency and more. Up to 15% off direct purchases via WhatsApp.";
 
   return {
     title,

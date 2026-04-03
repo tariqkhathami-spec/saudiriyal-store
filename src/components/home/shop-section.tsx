@@ -18,8 +18,8 @@ export function ShopSection() {
 
   const buyMessage =
     locale === "ar"
-      ? "السلام عليكم، أريد شراء قطعة من موقعكم saudiriyal.store. أريد الاستفادة من خصم 10%."
-      : "Hello, I want to buy an item from your website saudiriyal.store. I'd like to get the 10% direct discount.";
+      ? "السلام عليكم، أريد شراء قطعة من موقعكم saudiriyal.store. أريد الاستفادة من الخصم المباشر (10% PayPal / 15% تحويل)."
+      : "Hello, I want to buy an item from your website saudiriyal.store. I'd like to get the direct discount (10% PayPal / 15% bank transfer).";
 
   const specialOrderMessage =
     locale === "ar"
@@ -81,11 +81,11 @@ export function ShopSection() {
             </a>
           </div>
 
-          {/* Buy Direct — 10% Off */}
+          {/* Buy Direct — Up to 15% Off */}
           <div className="bg-white rounded-2xl border-2 border-gold p-6 sm:p-8 flex flex-col items-center text-center relative card-luxury">
             {/* Discount badge */}
             <div className="absolute -top-3 start-1/2 -translate-x-1/2 px-4 py-1 bg-gold text-navy text-xs font-bold rounded-full whitespace-nowrap">
-              10% OFF
+              UP TO 15% OFF
             </div>
             <div className="w-14 h-14 bg-[#25D366]/10 rounded-xl flex items-center justify-center mb-5">
               <svg className="w-7 h-7 text-[#25D366]" fill="currentColor" viewBox="0 0 24 24">

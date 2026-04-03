@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     template: "%s | Saudi Riyal Collection",
   },
   description:
-    "Buy rare Saudi Arabian banknotes, Ottoman currency, Middle Eastern coins & medals. PMG & NGC graded. 100% authentic with 10% off direct purchase. Trusted eBay seller since 2012 with 100% positive feedback. Free worldwide shipping.",
+    "Buy rare Saudi Arabian banknotes, Ottoman currency, Middle Eastern coins & medals. PMG & NGC graded. 100% authentic with up to 15% off direct purchase. Trusted eBay seller since 2012 with 100% positive feedback. Free worldwide shipping.",
   metadataBase: new URL("https://saudiriyal.store"),
   keywords: [
     "rare banknotes for sale",
@@ -76,13 +76,13 @@ export const metadata: Metadata = {
     locale: "en_US",
     alternateLocale: "ar_SA",
     title: "Saudi Riyal Collection — Rare Banknotes & Currency for Sale",
-    description: "Buy rare PMG graded banknotes from Saudi Arabia, Ottoman Empire & Middle East. 10% off direct purchases. 100% authentic, worldwide shipping.",
+    description: "Buy rare PMG graded banknotes from Saudi Arabia, Ottoman Empire & Middle East. Up to 15% off direct purchases. 100% authentic, worldwide shipping.",
     url: "https://saudiriyal.store",
   },
   twitter: {
     card: "summary_large_image",
     title: "Saudi Riyal Collection — Rare Banknotes for Sale",
-    description: "Buy rare PMG graded banknotes. 10% off direct purchases. Trusted eBay seller since 2012.",
+    description: "Buy rare PMG graded banknotes. Up to 15% off direct purchases. Trusted eBay seller since 2012.",
   },
   robots: {
     index: true,

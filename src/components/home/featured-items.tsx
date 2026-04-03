@@ -142,10 +142,10 @@ export function FeaturedItems() {
                         {formatPrice(typedItem.price, typedItem.price_currency)}
                       </p>
                       <p className="text-gold font-semibold">
-                        {formatPrice(Math.round(typedItem.price * 0.9), typedItem.price_currency)}
+                        {formatPrice(Math.round(typedItem.price * 0.85), typedItem.price_currency)}
                       </p>
                       <span className="text-success text-[10px] font-bold bg-success/10 px-1.5 py-0.5 rounded">
-                        -10%
+                        -15%
                       </span>
                     </div>
                   )}

@@ -24,12 +24,14 @@ export function ItemDetailContent({ item }: { item: Item }) {
   const description = localized(item, "description", locale);
 
   const whatsappNumber = "966504820501";
-  const directPrice = item.price ? Math.round(item.price * 0.9) : null;
-  const savings = item.price && directPrice ? item.price - directPrice : null;
+  const paypalPrice = item.price ? Math.round(item.price * 0.9) : null;
+  const transferPrice = item.price ? Math.round(item.price * 0.85) : null;
+  const paypalSavings = item.price && paypalPrice ? item.price - paypalPrice : null;
+  const transferSavings = item.price && transferPrice ? item.price - transferPrice : null;
 
   const buyDirectMessage = locale === "ar"
-    ? `السلام عليكم، أريد شراء هذه القطعة بالسعر المباشر (خصم 10%):\n${item.title_en}\nالسعر: $${directPrice?.toLocaleString()}\nالرابط: https://saudiriyal.store/${locale}/item/${item.slug}`
-    : `Hello, I want to buy this item at the direct price (10% off):\n${item.title_en}\nPrice: $${directPrice?.toLocaleString()}\nLink: https://saudiriyal.store/${locale}/item/${item.slug}`;
+    ? `السلام عليكم، أريد شراء هذه القطعة بالسعر المباشر:\n${item.title_en}\nسعر PayPal (خصم 10%): $${paypalPrice?.toLocaleString()}\nسعر التحويل (خصم 15%): $${transferPrice?.toLocaleString()}\nالرابط: https://saudiriyal.store/${locale}/item/${item.slug}`
+    : `Hello, I want to buy this item at the direct price:\n${item.title_en}\nPayPal Price (10% off): $${paypalPrice?.toLocaleString()}\nTransfer Price (15% off): $${transferPrice?.toLocaleString()}\nLink: https://saudiriyal.store/${locale}/item/${item.slug}`;
 
   const whatsappBuyUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(buyDirectMessage)}`;
 
@@ -177,8 +179,8 @@ export function ItemDetailContent({ item }: { item: Item }) {
                   )}
                 </div>
 
-                {/* Direct Price — 10% Off */}
-                <div className="flex items-center justify-between pt-4">
+                {/* PayPal Price — 10% Off */}
+                <div className="flex items-center justify-between pt-4 pb-4 border-b border-border">
                   <div>
                     <div className="flex items-center gap-2 mb-1">
                       <p className="text-muted text-xs">{t("directPrice")}</p>
@@ -186,12 +188,33 @@ export function ItemDetailContent({ item }: { item: Item }) {
                         -10%
                       </span>
                     </div>
-                    <p className="text-gold font-bold text-2xl">
-                      {formatPrice(directPrice!, item.price_currency)}
+                    <p className="text-gold font-bold text-xl">
+                      {formatPrice(paypalPrice!, item.price_currency)}
                     </p>
-                    {savings && (
+                    {paypalSavings && (
                       <p className="text-success text-xs font-medium mt-0.5">
-                        {t("save")} {formatPrice(savings, item.price_currency)}
+                        {t("save")} {formatPrice(paypalSavings, item.price_currency)}
+                      </p>
+                    )}
+                  </div>
+                  <span className="text-muted text-xs">via PayPal</span>
+                </div>
+
+                {/* Transfer Price — 15% Off */}
+                <div className="flex items-center justify-between pt-4">
+                  <div>
+                    <div className="flex items-center gap-2 mb-1">
+                      <p className="text-muted text-xs">{t("transferPrice")}</p>
+                      <span className="px-2 py-0.5 bg-success/10 text-success text-xs font-bold rounded-full">
+                        -15%
+                      </span>
+                    </div>
+                    <p className="text-success font-bold text-2xl">
+                      {formatPrice(transferPrice!, item.price_currency)}
+                    </p>
+                    {transferSavings && (
+                      <p className="text-success text-xs font-medium mt-0.5">
+                        {t("save")} {formatPrice(transferSavings, item.price_currency)}
                       </p>
                     )}
                   </div>
@@ -199,7 +222,7 @@ export function ItemDetailContent({ item }: { item: Item }) {
                     href={whatsappBuyUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={() => trackWhatsAppBuy(item.title_en, directPrice || 0, item.price_currency || "USD")}
+                    onClick={() => trackWhatsAppBuy(item.title_en, transferPrice || 0, item.price_currency || "USD")}
                     className="px-5 py-2.5 bg-[#25D366] hover:bg-[#20BD5A] text-white font-semibold rounded-lg transition-colors text-sm flex items-center gap-2"
                   >
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">

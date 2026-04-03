@@ -340,10 +340,10 @@ export function CollectionContent({ filters }: Props) {
                           {formatPrice(item.price, item.price_currency)}
                         </p>
                         <p className="text-gold font-semibold text-sm">
-                          {formatPrice(Math.round(item.price * 0.9), item.price_currency)}
+                          {formatPrice(Math.round(item.price * 0.85), item.price_currency)}
                         </p>
                         <span className="text-success text-[10px] font-bold bg-success/10 px-1.5 py-0.5 rounded">
-                          -10%
+                          -15%
                         </span>
                       </div>
                     ) : (

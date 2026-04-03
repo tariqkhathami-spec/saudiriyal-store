@@ -39,7 +39,7 @@ export async function generateMetadata({
 
   return {
     title: fullTitle,
-    description: description?.slice(0, 160) || `Buy ${title}. ${item.grading_company} ${item.grade} graded. Authentic, professionally certified. 10% off direct purchase.`,
+    description: description?.slice(0, 160) || `Buy ${title}. ${item.grading_company} ${item.grade} graded. Authentic, professionally certified. Up to 15% off direct purchase.`,
     openGraph: {
       title: fullTitle,
       description: description?.slice(0, 160),

@@ -13,12 +13,12 @@ export async function generateMetadata({
 
   const title =
     locale === "ar"
-      ? "اشتري أوراق نقدية نادرة مصنفة PMG — وفر 10% عند الشراء المباشر"
-      : "Buy Rare PMG-Graded Banknotes — Save 10% Direct";
+      ? "اشتري أوراق نقدية نادرة مصنفة PMG — وفر حتى 15% عند الشراء المباشر"
+      : "Buy Rare PMG-Graded Banknotes — Save Up to 15% Direct";
   const description =
     locale === "ar"
-      ? "أوراق نقدية نادرة مصنفة من PMG و NGC للبيع. خصم 10% عند الشراء المباشر عبر واتساب. بائع موثوق على إيباي بتقييم 100%. شحن عالمي مجاني."
-      : "Rare PMG & NGC graded banknotes for sale. Save 10% buying direct via WhatsApp. 100% eBay feedback, 216+ sold. Free worldwide shipping.";
+      ? "أوراق نقدية نادرة مصنفة من PMG و NGC للبيع. وفر حتى 15% عند الشراء المباشر عبر واتساب. بائع موثوق على إيباي بتقييم 100%. شحن عالمي مجاني."
+      : "Rare PMG & NGC graded banknotes for sale. Save up to 15% buying direct via WhatsApp. 100% eBay feedback, 216+ sold. Free worldwide shipping.";
 
   return {
     title,
