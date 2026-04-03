@@ -47,3 +47,4 @@ npm run dev
 ## Admin Access
 
 Navigate to `/en/admin/login` to access the admin panel.
+
