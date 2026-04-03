@@ -18,8 +18,8 @@ export function ShopSection() {
 
   const buyMessage =
     locale === "ar"
-      ? "السلام عليكم، أريد شراء قطعة من موقعكم saudiriyal.store. أريد الاستفادة من الخصم المباشر (10% PayPal / 15% تحويل)."
-      : "Hello, I want to buy an item from your website saudiriyal.store. I'd like to get the direct discount (10% PayPal / 15% bank transfer).";
+      ? "السلام عليكم، أريد شراء قطعة من موقعكم saudiriyal.store. أريد الاستفادة من الخصم المباشر (10% PayPal / 15% تحويل بنكي داخل السعودية)."
+      : "Hello, I want to buy an item from your website saudiriyal.store. I'd like to get the direct discount (10% PayPal / 15% bank transfer KSA only).";
 
   const specialOrderMessage =
     locale === "ar"

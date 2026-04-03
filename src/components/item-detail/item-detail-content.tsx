@@ -30,8 +30,8 @@ export function ItemDetailContent({ item }: { item: Item }) {
   const transferSavings = item.price && transferPrice ? item.price - transferPrice : null;
 
   const buyDirectMessage = locale === "ar"
-    ? `السلام عليكم، أريد شراء هذه القطعة بالسعر المباشر:\n${item.title_en}\nسعر PayPal (خصم 10%): $${paypalPrice?.toLocaleString()}\nسعر التحويل (خصم 15%): $${transferPrice?.toLocaleString()}\nالرابط: https://saudiriyal.store/${locale}/item/${item.slug}`
-    : `Hello, I want to buy this item at the direct price:\n${item.title_en}\nPayPal Price (10% off): $${paypalPrice?.toLocaleString()}\nTransfer Price (15% off): $${transferPrice?.toLocaleString()}\nLink: https://saudiriyal.store/${locale}/item/${item.slug}`;
+    ? `السلام عليكم، أريد شراء هذه القطعة بالسعر المباشر:\n${item.title_en}\nسعر PayPal (خصم 10%): $${paypalPrice?.toLocaleString()}\nسعر التحويل البنكي داخل السعودية (خصم 15%): $${transferPrice?.toLocaleString()}\nالرابط: https://saudiriyal.store/${locale}/item/${item.slug}`
+    : `Hello, I want to buy this item at the direct price:\n${item.title_en}\nPayPal Price (10% off): $${paypalPrice?.toLocaleString()}\nBank Transfer KSA (15% off): $${transferPrice?.toLocaleString()}\nLink: https://saudiriyal.store/${locale}/item/${item.slug}`;
 
   const whatsappBuyUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(buyDirectMessage)}`;
 
@@ -197,7 +197,7 @@ export function ItemDetailContent({ item }: { item: Item }) {
                       </p>
                     )}
                   </div>
-                  <span className="text-muted text-xs">via PayPal</span>
+                  <span className="text-muted text-[10px]">via PayPal</span>
                 </div>
 
                 {/* Transfer Price — 15% Off */}
