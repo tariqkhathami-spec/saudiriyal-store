@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { cn, localized, formatPrice, getImageUrl, getConditionLabel, getStatusColor } from "@/lib/utils";
+import { trackWhatsAppBuy, trackWhatsAppInquiry, trackEbayClick } from "@/lib/gtm";
 import Image from "next/image";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
@@ -168,6 +169,7 @@ export function ItemDetailContent({ item }: { item: Item }) {
                       href={item.ebay_url}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() => trackEbayClick(item.title_en, item.price || 0, item.price_currency || "USD")}
                       className="px-5 py-2.5 border border-navy text-navy hover:bg-navy hover:text-ivory rounded-lg font-semibold transition-colors text-sm"
                     >
                       {t("viewOnEbay")}
@@ -197,6 +199,7 @@ export function ItemDetailContent({ item }: { item: Item }) {
                     href={whatsappBuyUrl}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => trackWhatsAppBuy(item.title_en, directPrice || 0, item.price_currency || "USD")}
                     className="px-5 py-2.5 bg-[#25D366] hover:bg-[#20BD5A] text-white font-semibold rounded-lg transition-colors text-sm flex items-center gap-2"
                   >
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -237,6 +240,7 @@ export function ItemDetailContent({ item }: { item: Item }) {
                 href={whatsappInquiryUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackWhatsAppInquiry(item.title_en, item.price || 0, item.price_currency || "USD")}
                 className="w-full flex items-center justify-center gap-2 px-6 py-3 border border-navy text-navy hover:bg-navy hover:text-ivory rounded-lg font-semibold transition-colors text-sm"
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">

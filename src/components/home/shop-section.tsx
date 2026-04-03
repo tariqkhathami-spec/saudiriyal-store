@@ -2,6 +2,7 @@
 
 import { useTranslations, useLocale } from "next-intl";
 import { cn } from "@/lib/utils";
+import { trackShopSectionClick } from "@/lib/gtm";
 
 const WHATSAPP_NUMBER = "966504820501";
 const EBAY_STORE_URL = "https://ebay.us/m/kJKYZ7";
@@ -73,6 +74,7 @@ export function ShopSection() {
               href={EBAY_STORE_URL}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackShopSectionClick("ebay_store")}
               className="w-full px-5 py-3 bg-navy hover:bg-navy/90 text-ivory font-semibold rounded-lg transition-all text-sm text-center"
             >
               {t("visitEbayStore")}
@@ -103,6 +105,7 @@ export function ShopSection() {
             </p>
             <a
               href={getWhatsAppUrl(buyMessage)}
+              onClick={() => trackShopSectionClick("whatsapp_buy")}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full px-5 py-3 bg-[#25D366] hover:bg-[#20BD5A] text-white font-semibold rounded-lg transition-all text-sm text-center flex items-center justify-center gap-2"
@@ -134,6 +137,7 @@ export function ShopSection() {
             </p>
             <a
               href={getWhatsAppUrl(specialOrderMessage)}
+              onClick={() => trackShopSectionClick("special_order")}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full px-5 py-3 bg-gold hover:bg-gold-light text-navy font-semibold rounded-lg transition-all text-sm text-center flex items-center justify-center gap-2"

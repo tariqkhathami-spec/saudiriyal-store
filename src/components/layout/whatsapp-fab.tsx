@@ -1,8 +1,9 @@
 "use client";
 
+import { trackWhatsAppFab } from "@/lib/gtm";
+
 export function WhatsAppFab() {
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
-  if (!whatsappNumber) return null;
+  const whatsappNumber = "966504820501";
 
   const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
     "Hello, I'm interested in your rare currency collection."
@@ -13,6 +14,7 @@ export function WhatsAppFab() {
       href={url}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={() => trackWhatsAppFab()}
       className="fixed bottom-6 end-6 z-50 w-14 h-14 bg-[#25D366] hover:bg-[#20BD5A] rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all hover:scale-105"
       aria-label="Contact on WhatsApp"
     >

@@ -23,6 +23,21 @@ export async function POST(req: NextRequest) {
     }
 
     const html = await response.text();
+
+    // Detect eBay captcha/block pages
+    if (
+      html.includes("Pardon Our Interruption") ||
+      html.includes("pardon our interruption") ||
+      html.includes("verify yourself") ||
+      html.includes("captcha") ||
+      !html.includes("ebay")
+    ) {
+      return NextResponse.json(
+        { error: "eBay is blocking this request. Please try again in a few minutes." },
+        { status: 503 }
+      );
+    }
+
     const $ = cheerio.load(html);
 
     // --- Extract raw data from multiple sources ---
