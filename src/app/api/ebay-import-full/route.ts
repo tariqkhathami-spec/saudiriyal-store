@@ -107,6 +107,7 @@ export async function POST(req: NextRequest) {
 
     // Clean title
     let title = rawTitle
+      .replace(/<[^>]*>/g, "")                  // strip HTML tags like <wbr/>
       .replace(/\s*\|\s*eBay$/i, "")
       .replace(/➖/g, " - ")
       .replace(/\s*-\s*$/, "")
@@ -195,13 +196,16 @@ export async function POST(req: NextRequest) {
 
     // Denomination
     let denomination = "";
-    const denomMatch = title.match(/(\d+(?:\.\d+)?)\s*(Riyals?|Riyal|Pounds?|Dinars?|Lira|Piastres?|Fils|Rupees?|Ghirsh)/i);
+    const denomMatch = title.match(/(\d+(?:\.\d+)?)\s*(Riyals?|Riyal|Pounds?|Dinars?|Lira|Piastres?|Fils|Rupees?|Ghirsh|Kurush)/i);
     if (denomMatch) denomination = `${denomMatch[1]} ${denomMatch[2]}`;
 
     let currency = "";
     if (/riyal/i.test(denomination)) currency = "Saudi Riyal";
     else if (/pound/i.test(denomination)) currency = "Pound";
     else if (/dinar/i.test(denomination)) currency = "Dinar";
+    else if (/kurush/i.test(denomination)) currency = "Kurush";
+    else if (/lira/i.test(denomination)) currency = "Lira";
+    else if (/rupee/i.test(denomination)) currency = "Rupee";
 
     // Certification number
     let certificationNumber = specifics["Certification Number"] || specifics["Serial Number"] || "";

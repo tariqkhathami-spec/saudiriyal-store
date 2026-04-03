@@ -335,9 +335,17 @@ export function CollectionContent({ filters }: Props) {
                       )}
                     </div>
                     {item.price ? (
-                      <p className="text-gold font-semibold text-sm mt-2">
-                        {formatPrice(item.price, item.price_currency)}
-                      </p>
+                      <div className="mt-2 flex items-baseline gap-2">
+                        <p className="text-muted text-xs line-through">
+                          {formatPrice(item.price, item.price_currency)}
+                        </p>
+                        <p className="text-gold font-semibold text-sm">
+                          {formatPrice(Math.round(item.price * 0.9), item.price_currency)}
+                        </p>
+                        <span className="text-success text-[10px] font-bold bg-success/10 px-1.5 py-0.5 rounded">
+                          -10%
+                        </span>
+                      </div>
                     ) : (
                       <p className="text-muted text-xs mt-2 italic">Contact for price</p>
                     )}

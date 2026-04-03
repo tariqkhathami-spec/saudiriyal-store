@@ -112,6 +112,7 @@ export async function POST(req: NextRequest) {
 
     // Clean title: remove eBay artifacts
     let title = rawTitle
+      .replace(/<[^>]*>/g, "")                  // strip HTML tags like <wbr/>
       .replace(/\s*\|\s*eBay$/i, "")          // remove "| eBay" suffix
       .replace(/➖/g, " - ")                    // replace ➖ with dash
       .replace(/\s*-\s*$/, "")                  // remove trailing dash
@@ -230,7 +231,7 @@ export async function POST(req: NextRequest) {
 
     // Denomination: extract from title (e.g., "10 Riyals", "5 Pounds", "1 Dinar")
     let denomination = "";
-    const denomMatch = title.match(/(\d+(?:\.\d+)?)\s*(Riyals?|Riyal|Pounds?|Dinars?|Lira|Piastres?|Fils|Rupees?|Ghirsh)/i);
+    const denomMatch = title.match(/(\d+(?:\.\d+)?)\s*(Riyals?|Riyal|Pounds?|Dinars?|Lira|Piastres?|Fils|Rupees?|Ghirsh|Kurush)/i);
     if (denomMatch) {
       denomination = `${denomMatch[1]} ${denomMatch[2]}`;
     }
