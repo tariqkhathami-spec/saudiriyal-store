@@ -239,8 +239,33 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // --- Step 4: Create item in database ---
-    const slug = slugify(title);
+    // --- Step 4: Check for duplicate eBay item ---
+    if (ebayItemId) {
+      const { data: existing } = await supabaseAdmin
+        .from("items")
+        .select("id, title_en")
+        .eq("ebay_item_id", ebayItemId)
+        .maybeSingle();
+      if (existing) {
+        return NextResponse.json(
+          { error: `This item is already imported: "${existing.title_en}"` },
+          { status: 409 }
+        );
+      }
+    }
+
+    // --- Step 5: Create item in database ---
+    let slug = slugify(title);
+
+    // Ensure slug is unique — append suffix if needed
+    const { data: slugCheck } = await supabaseAdmin
+      .from("items")
+      .select("id")
+      .eq("slug", slug)
+      .maybeSingle();
+    if (slugCheck) {
+      slug = `${slug}-${Date.now().toString(36)}`;
+    }
 
     const { data: itemData, error: itemError } = await supabaseAdmin
       .from("items")
