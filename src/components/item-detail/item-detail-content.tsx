@@ -197,7 +197,18 @@ export function ItemDetailContent({ item }: { item: Item }) {
                       </p>
                     )}
                   </div>
-                  <span className="text-muted text-[10px]">via PayPal</span>
+                  <a
+                    href={`https://paypal.me/khathaam/${paypalPrice}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => trackWhatsAppBuy(item.title_en, paypalPrice || 0, item.price_currency || "USD")}
+                    className="px-4 py-2 bg-[#0070BA] hover:bg-[#005EA6] text-white font-semibold rounded-lg transition-colors text-sm flex items-center gap-2"
+                  >
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M7.076 21.337H2.47a.641.641 0 01-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 00-.607-.541c1.27.96 1.516 2.762 1.14 4.846-.028.148-.06.3-.093.448-1.005 5.152-4.438 6.942-8.831 6.942h-.744c-.54 0-1 .396-1.083.932l-.846 5.384-.24 1.521a.641.641 0 00.633.74h4.066c.46 0 .853-.334.926-.788l.038-.2.733-4.642.047-.256a.93.93 0 01.92-.788h.577c3.76 0 6.704-1.528 7.565-5.946.36-1.847.174-3.388-.777-4.471a3.816 3.816 0 00-1.084-.88z"/>
+                    </svg>
+                    PayPal
+                  </a>
                 </div>
 
                 {/* Transfer Price — 15% Off */}
