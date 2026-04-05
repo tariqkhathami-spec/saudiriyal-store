@@ -61,6 +61,24 @@ export function ItemForm({ item, prefill }: Props) {
     setImagePreviews((prev) => prev.filter((_, i) => i !== index));
   }
 
+  function moveImage(index: number, direction: "up" | "down") {
+    const newIndex = direction === "up" ? index - 1 : index + 1;
+    if (newIndex < 0 || newIndex >= imagePreviews.length) return;
+    setImagePreviews((prev) => {
+      const arr = [...prev];
+      [arr[index], arr[newIndex]] = [arr[newIndex], arr[index]];
+      return arr;
+    });
+    setImageFiles((prev) => {
+      if (prev.length === 0) return prev;
+      const arr = [...prev];
+      if (index < arr.length && newIndex < arr.length) {
+        [arr[index], arr[newIndex]] = [arr[newIndex], arr[index]];
+      }
+      return arr;
+    });
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!form.title_en) {
@@ -421,20 +439,52 @@ export function ItemForm({ item, prefill }: Props) {
         </div>
 
         {imagePreviews.length > 0 && (
-          <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 mt-4">
-            {imagePreviews.map((preview, i) => (
-              <div key={i} className="relative aspect-square rounded-lg overflow-hidden bg-ivory-dark">
-                <img src={preview} alt="" className="w-full h-full object-cover" />
-                <button
-                  type="button"
-                  onClick={() => removeImage(i)}
-                  className="absolute top-1 end-1 w-6 h-6 bg-error text-white rounded-full flex items-center justify-center text-xs hover:bg-red-700"
-                >
-                  &times;
-                </button>
-              </div>
-            ))}
-          </div>
+          <>
+            <p className="text-muted text-xs mt-4 mb-2">Drag photos to reorder. First photo = primary image shown on listings.</p>
+            <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
+              {imagePreviews.map((preview, i) => (
+                <div key={i} className={cn("relative aspect-square rounded-lg overflow-hidden bg-ivory-dark", i === 0 && "ring-2 ring-gold")}>
+                  <img src={preview} alt="" className="w-full h-full object-cover" />
+                  {i === 0 && (
+                    <span className="absolute top-1 start-1 px-1.5 py-0.5 bg-gold text-navy text-[10px] font-bold rounded">
+                      Primary
+                    </span>
+                  )}
+                  <div className="absolute top-1 end-1 flex flex-col gap-0.5">
+                    <button
+                      type="button"
+                      onClick={() => removeImage(i)}
+                      className="w-6 h-6 bg-error text-white rounded-full flex items-center justify-center text-xs hover:bg-red-700"
+                    >
+                      &times;
+                    </button>
+                  </div>
+                  <div className="absolute bottom-1 end-1 flex gap-0.5">
+                    {i > 0 && (
+                      <button
+                        type="button"
+                        onClick={() => moveImage(i, "up")}
+                        className="w-6 h-6 bg-navy/80 text-white rounded flex items-center justify-center text-xs hover:bg-navy"
+                        title="Move left"
+                      >
+                        &#8592;
+                      </button>
+                    )}
+                    {i < imagePreviews.length - 1 && (
+                      <button
+                        type="button"
+                        onClick={() => moveImage(i, "down")}
+                        className="w-6 h-6 bg-navy/80 text-white rounded flex items-center justify-center text-xs hover:bg-navy"
+                        title="Move right"
+                      >
+                        &#8594;
+                      </button>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
         )}
       </section>
 

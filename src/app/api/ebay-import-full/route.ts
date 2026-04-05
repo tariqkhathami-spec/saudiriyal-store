@@ -109,14 +109,28 @@ export async function POST(req: NextRequest) {
       if (label && value) specifics[label] = value;
     });
 
-    if (imageUrls.length === 0) {
-      $("img").each((_, el) => {
-        const src = $(el).attr("src") || "";
-        if (src.includes("ebayimg.com/images/g/") && src.includes("s-l")) {
-          imageUrls.push(src);
+    // Always merge HTML carousel images with JSON-LD to get all images
+    $("img").each((_, el) => {
+      const src = $(el).attr("src") || "";
+      if (src.includes("ebayimg.com/images/g/") && src.includes("s-l")) {
+        imageUrls.push(src);
+      }
+    });
+    $("img[data-src]").each((_, el) => {
+      const src = $(el).attr("data-src") || "";
+      if (src.includes("ebayimg.com/images/g/") && src.includes("s-l")) {
+        imageUrls.push(src);
+      }
+    });
+    $("picture source").each((_, el) => {
+      const srcset = $(el).attr("srcset") || "";
+      const urls = srcset.split(",").map(s => s.trim().split(" ")[0]);
+      for (const u of urls) {
+        if (u.includes("ebayimg.com/images/g/")) {
+          imageUrls.push(u);
         }
-      });
-    }
+      }
+    });
 
     // --- Step 3: Clean and enrich data ---
 
@@ -318,7 +332,7 @@ export async function POST(req: NextRequest) {
 
     // --- Step 5: Download and upload images ---
     let uploadedCount = 0;
-    const imageSlice = highResUrls.slice(0, 10);
+    const imageSlice = highResUrls.slice(0, 20);
 
     for (let i = 0; i < imageSlice.length; i++) {
       try {

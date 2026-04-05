@@ -113,15 +113,30 @@ export async function POST(req: NextRequest) {
       }
     });
 
-    // 5. Images from HTML carousel (backup)
-    if (imageUrls.length === 0) {
-      $("img").each((_, el) => {
-        const src = $(el).attr("src") || "";
-        if (src.includes("ebayimg.com/images/g/") && src.includes("s-l")) {
-          imageUrls.push(src);
+    // 5. Images from HTML carousel (always merge with JSON-LD to get all images)
+    $("img").each((_, el) => {
+      const src = $(el).attr("src") || "";
+      if (src.includes("ebayimg.com/images/g/") && src.includes("s-l")) {
+        imageUrls.push(src);
+      }
+    });
+    // Also check data-src attributes for lazy-loaded images
+    $("img[data-src]").each((_, el) => {
+      const src = $(el).attr("data-src") || "";
+      if (src.includes("ebayimg.com/images/g/") && src.includes("s-l")) {
+        imageUrls.push(src);
+      }
+    });
+    // Check picture > source elements
+    $("picture source").each((_, el) => {
+      const srcset = $(el).attr("srcset") || "";
+      const urls = srcset.split(",").map(s => s.trim().split(" ")[0]);
+      for (const u of urls) {
+        if (u.includes("ebayimg.com/images/g/")) {
+          imageUrls.push(u);
         }
-      });
-    }
+      }
+    });
 
     // --- Clean up and enrich the data ---
 
@@ -311,7 +326,7 @@ export async function POST(req: NextRequest) {
       condition,
       ebay_url: url,
       ebay_item_id: ebayItemId,
-      imageUrls: highResUrls.slice(0, 10),
+      imageUrls: highResUrls.slice(0, 20),
       type: "banknote",
     });
   } catch (error) {
