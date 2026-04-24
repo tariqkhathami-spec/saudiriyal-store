@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
@@ -34,8 +35,15 @@ export function Header() {
         <div className="flex h-16 items-center justify-between sm:h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gold/20 border border-gold/40 flex items-center justify-center group-hover:bg-gold/30 transition-colors">
-              <span className="text-gold font-bold text-sm sm:text-base">SR</span>
+            <div className="relative w-9 h-9 sm:w-11 sm:h-11 rounded-full overflow-hidden ring-1 ring-gold/40 group-hover:ring-gold/70 transition-all">
+              <Image
+                src="/logo.png"
+                alt={tSite("name")}
+                fill
+                sizes="44px"
+                priority
+                className="object-cover"
+              />
             </div>
             <div className="hidden sm:block">
               <p className={cn(
