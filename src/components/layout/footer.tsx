@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { SITE_CONFIG } from "@/lib/constants";
@@ -18,9 +19,13 @@ export function Footer() {
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-full bg-gold/20 border border-gold/40 flex items-center justify-center">
-                <span className="text-gold font-bold text-sm">SR</span>
-              </div>
+              <Image
+                src="/logo.webp"
+                alt={tSite("name")}
+                width={80}
+                height={80}
+                className="w-9 h-9 rounded-full object-cover"
+              />
               <span className={`text-ivory font-semibold ${isRtl ? "font-[family-name:var(--font-noto-naskh)]" : "font-[family-name:var(--font-playfair)]"}`}>
                 {tSite("name")}
               </span>
